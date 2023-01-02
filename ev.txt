@@ -1,0 +1,6 @@
+db.users.aggregate([{$lookup:{from:"purchases",localField:"_id",foreignField:"user_id",as:"purchases
+
+db.users.aggregate([{$lookup:{from:"purchases",localField:"_id",foreignField:"user_id",as:"purchases"}},{$unwind:"$purchases"},{$group:{_id:"$_id",total_purcheses:{$sum:"$purchases.price"}}}])
+
+
+ db.users.aggregate([{$lookup:{from:"purchases",localField:"_id",foreignField:"user_id",as:"purchases"}},{$unwind:"$purchases"},{$group:{_id:"$_id",total_purcheses:{$sum:"$purchases.price"}}},{$sort:{"total_purcheses":-1}}])
